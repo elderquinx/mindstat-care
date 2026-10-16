@@ -225,6 +225,7 @@
               <div>
                 <label style="font-size:0.75rem;font-weight:700;">Department</label>
                 <select id="m-dept">
+                  <option value="" disabled selected>-- Select Department --</option>
                   <option>Computer Science &amp; AI</option>
                   <option>Electronics &amp; Telecom</option>
                   <option>Mechanical &amp; Civil</option>
@@ -234,9 +235,10 @@
               <div>
                 <label style="font-size:0.75rem;font-weight:700;">Academic Year</label>
                 <select id="m-year">
+                  <option value="" disabled selected>-- Select Academic Year --</option>
                   <option>First Year (FY)</option>
                   <option>Second Year (SY)</option>
-                  <option selected>Third Year (TY)</option>
+                  <option>Third Year (TY)</option>
                   <option>Final Year (B.Tech/M.Sc)</option>
                 </select>
               </div>
@@ -444,6 +446,7 @@ function updateQuestions() {
     <div class="q-card">
       <label>Q1. ${ctx.q1}</label>
       <select id="q1">
+        <option value="" disabled selected>-- Select an option --</option>
         <option value="stressed">I get stressed and find it hard to adjust.</option>
         <option value="calm">I stay calm and adapt quickly.</option>
         <option value="wait">I wait for someone to guide me.</option>
@@ -452,6 +455,7 @@ function updateQuestions() {
     <div class="q-card">
       <label>Q2. ${ctx.q2}</label>
       <select id="q2">
+        <option value="" disabled selected>-- Select an option --</option>
         <option value="urgent">I focus on the most urgent tasks first.</option>
         <option value="plan">I make a detailed plan and follow it step by step.</option>
         <option value="easy">I tackle the easiest tasks first.</option>
@@ -460,12 +464,14 @@ function updateQuestions() {
     <div class="q-card" style="border-left-color:#F59E0B;">
       <label>🔍 Q3. ${trap.text}</label>
       <select id="q-trap">
+        <option value="" disabled selected>-- Select an option --</option>
         ${trap.options.map(o => `<option value="${o}">${o}</option>`).join("")}
       </select>
     </div>
     <div class="q-card">
       <label>Q4. ${ctx.q3}</label>
       <select id="q3">
+        <option value="" disabled selected>-- Select an option --</option>
         <option value="break">I break it down into smaller parts and tackle each one.</option>
         <option value="avoid">I distract myself and come back to it later.</option>
         <option value="help">I ask friends or mentors for advice.</option>
@@ -474,6 +480,7 @@ function updateQuestions() {
     <div class="q-card">
       <label>Q5. ${ctx.q4}</label>
       <select id="q4">
+        <option value="" disabled selected>-- Select an option --</option>
         <option value="alone">Spending quiet time alone.</option>
         <option value="friends">Hanging out with friends.</option>
         <option value="hobby">Pursuing a creative or athletic hobby.</option>
@@ -494,9 +501,15 @@ function submitMobileCheckin() {
   const q1 = document.getElementById("q1").value;
   const q2 = document.getElementById("q2").value;
   const q3 = document.getElementById("q3").value;
+  const q4 = document.getElementById("q4").value;
   const trapVal = document.getElementById("q-trap").value;
   const trapCorrect = TRAPS[trapIndex % TRAPS.length].correct;
   const wantHelp = document.getElementById("m-help").checked;
+
+  if (!dept || !year || !q1 || !q2 || !q3 || !q4 || !trapVal) {
+    alert("⚠️ Please answer all questions before submitting your check-in!");
+    return;
+  }
 
   const passedGate = (trapVal === trapCorrect);
   const stress = +(10 + (q1 === "stressed" ? 12.5 : 3.2) + (q2 === "urgent" ? 4.8 : 1.5) + (q3 === "avoid" ? 3.5 : 1.0)).toFixed(1);

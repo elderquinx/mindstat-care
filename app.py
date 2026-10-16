@@ -548,9 +548,21 @@ def render_student_experience(key_prefix="stu", is_compact=False):
             st.markdown("##### 1️⃣ Your Cohort *(Coarse Bucket Only — Never Linked to Identity)*")
             dc1, dc2 = st.columns(2)
             with dc1:
-                s_dept = st.selectbox("Academic Department:", all_depts, key=f"{key_prefix}_dept")
+                s_dept = st.selectbox(
+                    "Academic Department:",
+                    options=all_depts,
+                    index=None,
+                    placeholder="-- Select Department --",
+                    key=f"{key_prefix}_dept",
+                )
             with dc2:
-                s_year = st.selectbox("Academic Year:", all_years, key=f"{key_prefix}_year")
+                s_year = st.selectbox(
+                    "Academic Year:",
+                    options=all_years,
+                    index=None,
+                    placeholder="-- Select Academic Year --",
+                    key=f"{key_prefix}_year",
+                )
 
             st.divider()
             st.markdown(f"##### 2️⃣ This Week's Situational Check-In *({ctx_data['badge']})*")
@@ -559,7 +571,7 @@ def render_student_experience(key_prefix="stu", is_compact=False):
                 s_likert_ans[q_id] = st.radio(
                     f"**{idx + 1}. {q_text}** *({q_trait})*",
                     options=LIKERT_OPTIONS,
-                    index=2,
+                    index=None,
                     horizontal=True,
                     key=f"{key_prefix}_lik_{q_id}_{st.session_state.question_seed}",
                 )
@@ -568,7 +580,7 @@ def render_student_experience(key_prefix="stu", is_compact=False):
             s_attn_ans = st.radio(
                 f"🔍 **{active_attn['prompt']}**",
                 options=LIKERT_OPTIONS,
-                index=LIKERT_OPTIONS.index(active_attn["expected"]),
+                index=None,
                 horizontal=True,
                 key=f"{key_prefix}_attn_{st.session_state.question_seed}",
             )
@@ -580,6 +592,7 @@ def render_student_experience(key_prefix="stu", is_compact=False):
                 choice = st.radio(
                     f"**{b_idx + 1}. {b_item['prompt']}**",
                     options=b_item["options"],
+                    index=None,
                     key=f"{key_prefix}_beh_{b_item['key']}_{st.session_state.question_seed}",
                 )
                 if choice == CUSTOM_OPTION_LABEL:
@@ -588,7 +601,7 @@ def render_student_experience(key_prefix="stu", is_compact=False):
                         placeholder="Write how you personally react or cope in your own words...",
                         key=f"{key_prefix}_cust_{b_item['key']}_{st.session_state.question_seed}",
                     )
-                    s_beh_ans[b_item["key"]] = f"Custom: {scrub_pii_text(custom_txt)}" if custom_txt.strip() else "Custom personal coping strategy"
+                    s_beh_ans[b_item["key"]] = f"Custom: {scrub_pii_text(custom_txt)}" if custom_txt.strip() else None
                 else:
                     s_beh_ans[b_item["key"]] = choice
 
@@ -607,7 +620,26 @@ def render_student_experience(key_prefix="stu", is_compact=False):
             )
 
             if st.button("🚀 Submit My Anonymous Check-In & View Results", use_container_width=True, type="primary", key=f"{key_prefix}_submit"):
-                if s_attn_ans != active_attn["expected"]:
+                missing_items = []
+                if not s_dept:
+                    missing_items.append("Academic Department")
+                if not s_year:
+                    missing_items.append("Academic Year")
+
+                unanswered_likerts = [idx + 1 for idx, (q_id, _, _) in enumerate(selected_likerts) if not s_likert_ans.get(q_id)]
+                if unanswered_likerts:
+                    missing_items.append(f"Situational Question(s): #{', #'.join(map(str, unanswered_likerts))}")
+
+                if not s_attn_ans:
+                    missing_items.append("Quality Verification Item")
+
+                unanswered_beh = [b_idx + 1 for b_idx, b_item in enumerate(selected_behavioral) if not s_beh_ans.get(b_item["key"])]
+                if unanswered_beh:
+                    missing_items.append(f"Personality / Coping Question(s): #{', #'.join(map(str, unanswered_beh))}")
+
+                if missing_items:
+                    st.error("⚠️ **Please complete all questions before submitting:**\n\n- " + "\n- ".join(missing_items))
+                elif s_attn_ans != active_attn["expected"]:
                     st.error(
                         f"🛑 **Blocked by Quality Verification Check:** Expected **'{active_attn['expected']}'**, but got **'{s_attn_ans}'**. Please read carefully and try again!"
                     )
