@@ -1,0 +1,20 @@
+# Virtual Environment & Python Cache
+.venv/
+__pycache__/
+*.pyc
+
+# Headless Browser Temp Profiles
+data/edge_profile/
+data/edge_tmp_profile/
+data/browser_tmp/
+data/chrome_tmp/
+
+# Raw Pilot Excel Sheets (Excluded from Public Repo for Strict Zero-PII Compliance)
+simple personality test/
+
+# Reference Literature PDFs
+Dass21 questionnaire.pdf
+Dass42 questionnaire.pdf
+Dass_template.pdf
+The PHQ-9 paper on questionnaire for depression.pdf
+MindStat Poster.pdf

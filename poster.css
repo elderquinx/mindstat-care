@@ -1,0 +1,493 @@
+/* ==========================================================================
+   MINDSTAT CARE - RESEARCH & ARCHITECTURE POSTER CSS
+   Physical Print Layout: 1000mm x 1000mm Square
+   Theme: Academic Navy (#0F2C59) & Clean Slate (#F8FAFC)
+   ========================================================================== */
+
+@page {
+  size: 1000mm 1000mm;
+  margin: 0mm;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+html, body {
+  width: 1000mm;
+  height: 1000mm;
+  background-color: #0F172A;
+  font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  color: #1E293B;
+}
+
+/* Interactive Screen Toolbar (Hidden Automatically When Printing) */
+.screen-toolbar {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 9999;
+  background: rgba(15, 44, 89, 0.96);
+  color: #FFFFFF;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 2px solid #38BDF8;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.screen-toolbar button {
+  background: #0284C7;
+  color: #FFFFFF;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.screen-toolbar button.secondary {
+  background: #1E293B;
+  border: 1px solid #94A3B8;
+}
+
+.screen-toolbar button:hover {
+  background: #0369A1;
+}
+
+@media print {
+  .screen-toolbar {
+    display: none !important;
+  }
+  html, body {
+    width: 1000mm !important;
+    height: 1000mm !important;
+    overflow: hidden !important;
+    background-color: #F8FAFC !important;
+  }
+  .poster-canvas {
+    transform: none !important;
+    margin: 0 !important;
+  }
+}
+
+.poster-canvas {
+  width: 1000mm;
+  height: 1000mm;
+  padding: 10mm 12mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5.5mm;
+  background: linear-gradient(180deg, #F1F5F9 0%, #F8FAFC 100%);
+  border: 3mm solid #0F2C59;
+  position: relative;
+  transform-origin: top left;
+}
+
+/* ==========================================================================
+   1. TOP HEADER BANNER (NAVY BLUE #0F2C59) + REGISTRATION ID & POSTER NO. BOX
+   ========================================================================== */
+.poster-header {
+  background: linear-gradient(135deg, #0F2C59 0%, #1E3A8A 65%, #0F2C59 100%);
+  color: #FFFFFF;
+  padding: 9.5mm 14mm;
+  border-radius: 5mm;
+  display: grid;
+  grid-template-columns: 1fr 215mm;
+  gap: 12mm;
+  align-items: center;
+  box-shadow: 0 3mm 8mm rgba(15, 44, 89, 0.18);
+  border-bottom: 3mm solid #0284C7;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5mm;
+}
+
+.poster-title {
+  font-size: 17.5mm;
+  font-weight: 900;
+  line-height: 1.13;
+  letter-spacing: -0.2mm;
+  color: #FFFFFF;
+}
+
+.poster-title span.highlight {
+  color: #38BDF8;
+}
+
+.poster-subtitle {
+  font-size: 8.8mm;
+  font-weight: 500;
+  color: #E0F2FE;
+  line-height: 1.28;
+}
+
+/* Clean Registration ID & Poster No. Box (Top-Right) */
+.poster-number-box {
+  background-color: #FFFFFF;
+  color: #0F2C59;
+  border: 2mm solid #38BDF8;
+  border-radius: 4.5mm;
+  padding: 5.5mm 8mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3mm;
+  box-shadow: 0 2mm 6mm rgba(0, 0, 0, 0.22);
+}
+
+.poster-number-label {
+  font-size: 9.0mm;
+  font-weight: 900;
+  color: #0F2C59;
+  text-transform: uppercase;
+  letter-spacing: 0.4mm;
+  text-align: center;
+}
+
+.poster-number-writein {
+  height: 19mm;
+  border: 1.5mm dashed #0F2C59;
+  background-color: #F8FAFC;
+  border-radius: 3mm;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 5mm;
+  font-size: 10.5mm;
+  font-weight: 900;
+  color: #0F2C59;
+}
+
+/* ==========================================================================
+   2. EXECUTIVE ABSTRACT & CORE PROJECT METRICS STRIP
+   ========================================================================== */
+.abstract-kpi-strip {
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  gap: 8mm;
+  background-color: #FFFFFF;
+  border: 1.1mm solid #CBD5E1;
+  border-left: 4.5mm solid #0F2C59;
+  border-radius: 4.5mm;
+  padding: 6mm 10mm;
+  box-shadow: 0 1.5mm 4mm rgba(15, 44, 89, 0.06);
+}
+
+.abstract-box h2 {
+  font-size: 8.8mm;
+  font-weight: 800;
+  color: #0F2C59;
+  text-transform: uppercase;
+  letter-spacing: 0.3mm;
+  margin-bottom: 2mm;
+}
+
+.abstract-box p {
+  font-size: 6.65mm;
+  line-height: 1.36;
+  color: #1E293B;
+  text-align: justify;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4.5mm;
+}
+
+.kpi-card {
+  background: #F8FAFC;
+  border: 0.9mm solid #E2E8F0;
+  border-top: 2.2mm solid #0284C7;
+  border-radius: 3mm;
+  padding: 3.2mm 5mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kpi-card.emerald {
+  border-top-color: #16A34A;
+}
+
+.kpi-card.coral {
+  border-top-color: #DC2626;
+}
+
+.kpi-card.amber {
+  border-top-color: #D97706;
+}
+
+.kpi-val {
+  font-size: 10.6mm;
+  font-weight: 900;
+  color: #0F2C59;
+  line-height: 1.08;
+}
+
+.kpi-title {
+  font-size: 6.3mm;
+  font-weight: 800;
+  color: #334155;
+  margin-top: 1mm;
+  text-transform: uppercase;
+}
+
+.kpi-sub {
+  font-size: 5.6mm;
+  color: #64748B;
+  margin-top: 0.6mm;
+  line-height: 1.22;
+}
+
+/* ==========================================================================
+   3. MAIN 3-COLUMN ACADEMIC GRID
+   ========================================================================== */
+.poster-columns {
+  display: grid;
+  grid-template-columns: 316mm 322mm 316mm;
+  gap: 8mm;
+  flex: 1;
+  align-items: stretch;
+  min-height: 0;
+}
+
+.poster-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6mm;
+  min-height: 0;
+}
+
+/* Section Card Styling */
+.section-card {
+  background-color: #FFFFFF;
+  border: 1.1mm solid #CBD5E1;
+  border-radius: 4.5mm;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1.5mm 4mm rgba(15, 44, 89, 0.05);
+}
+
+.section-card.flex-grow {
+  flex: 1;
+}
+
+.section-header {
+  background-color: #0F2C59;
+  color: #FFFFFF;
+  padding: 4mm 7mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1.6mm solid #0284C7;
+}
+
+.section-header.teal {
+  background-color: #0F2C59;
+  border-bottom-color: #0D9488;
+}
+
+.section-header.emerald {
+  background-color: #0F2C59;
+  border-bottom-color: #16A34A;
+}
+
+.section-header h3 {
+  font-size: 8.3mm;
+  font-weight: 800;
+  letter-spacing: 0.2mm;
+  text-transform: uppercase;
+}
+
+.section-body {
+  padding: 4.8mm 6.8mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  gap: 3.2mm;
+  font-size: 6.5mm;
+  line-height: 1.32;
+  color: #1E293B;
+}
+
+.sub-heading {
+  font-size: 7.2mm;
+  font-weight: 800;
+  color: #0F2C59;
+  border-left: 2mm solid #0284C7;
+  padding-left: 3mm;
+}
+
+.bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+
+.bullet-list li {
+  position: relative;
+  padding-left: 4.8mm;
+  font-size: 6.45mm;
+  line-height: 1.31;
+}
+
+.bullet-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #0284C7;
+  font-weight: 900;
+}
+
+.bullet-list li strong {
+  color: #0F2C59;
+}
+
+/* Comparison Tables */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 6.35mm;
+}
+
+.comp-table th {
+  background-color: #0F2C59;
+  color: #FFFFFF;
+  font-weight: 800;
+  text-align: left;
+  padding: 2.5mm 3.8mm;
+  border: 0.6mm solid #CBD5E1;
+}
+
+.comp-table td {
+  padding: 2.4mm 3.8mm;
+  border: 0.6mm solid #CBD5E1;
+  vertical-align: top;
+}
+
+.comp-table tr:nth-child(even) td {
+  background-color: #F8FAFC;
+}
+
+.bad-cell {
+  color: #991B1B;
+  font-weight: 600;
+}
+
+.good-cell {
+  color: #065F46;
+  font-weight: 700;
+  background-color: #ECFDF5 !important;
+}
+
+/* Embedded 300 DPI Chart Containers */
+.chart-box {
+  background-color: #FFFFFF;
+  border: 0.9mm solid #CBD5E1;
+  border-radius: 3.5mm;
+  padding: 3.2mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2mm;
+}
+
+.chart-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2mm;
+}
+
+.chart-caption {
+  font-size: 6.0mm;
+  font-weight: 700;
+  color: #475569;
+  text-align: center;
+  line-height: 1.26;
+}
+
+/* Callout Highlight Boxes */
+.callout-banner {
+  background-color: #F0F9FF;
+  border: 0.9mm solid #BAE6FD;
+  border-left: 3mm solid #0284C7;
+  border-radius: 3mm;
+  padding: 3.5mm 4.8mm;
+  font-size: 6.55mm;
+  line-height: 1.34;
+}
+
+.callout-banner.emerald {
+  background-color: #ECFDF5;
+  border-color: #A7F3D0;
+  border-left-color: #16A34A;
+}
+
+.callout-banner.coral {
+  background-color: #FEF2F2;
+  border-color: #FECACA;
+  border-left-color: #DC2626;
+}
+
+.callout-banner strong {
+  color: #0F2C59;
+}
+
+/* Tech Stack Pill Bar */
+.tech-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5mm;
+}
+
+.tech-pill {
+  background-color: #F1F5F9;
+  border: 0.7mm solid #94A3B8;
+  color: #0F2C59;
+  font-size: 6.1mm;
+  font-weight: 800;
+  padding: 1.4mm 3.6mm;
+  border-radius: 2mm;
+}
+
+/* ==========================================================================
+   4. BOTTOM PROJECT IMPACT & MISSION BANNER
+   ========================================================================== */
+.poster-footer {
+  background: linear-gradient(90deg, #0F2C59 0%, #1E3A8A 50%, #0F2C59 100%);
+  color: #F8FAFC;
+  padding: 4.5mm 12mm;
+  border-radius: 4mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 6.6mm;
+  font-weight: 600;
+  border-top: 2mm solid #0284C7;
+}
+
+.footer-tag {
+  color: #38BDF8;
+  font-weight: 800;
+}

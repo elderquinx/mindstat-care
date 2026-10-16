@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MindStat Care: A Statistical Framework for Proactive Mental Health Assessment and Support Connection</title>
+  <link rel="stylesheet" href="poster.css" />
+</head>
+<body>
+
+  <!-- Non-Printable Screen Preview & Print Toolbar (Hidden Automatically When Printing) -->
+  <div class="screen-toolbar">
+    <span><strong>MindStat Care</strong> &bull; Research Poster Preview</span>
+    <button onclick="setScale('fit')">Fit to Screen</button>
+    <button class="secondary" onclick="setScale('actual')">1:1 Print Size</button>
+    <button onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <div class="poster-canvas" id="posterCanvas">
+
+    <!-- ====================================================================
+         1. TOP HEADER BANNER + CLEAN REGISTRATION ID & POSTER NO. BOX
+         ==================================================================== -->
+    <header class="poster-header">
+      <div class="header-left">
+        <h1 class="poster-title">
+          <span class="highlight">MindStat Care:</span> A Statistical Framework for Proactive Mental Health Assessment and Support Connection
+        </h1>
+        <p class="poster-subtitle">
+          An Institutional-Grade B2B Macro-Analytics Pipeline Bridging Clinical Psychometrics, Decoupled Zero-PII Anonymity, and Proactive Campus Wellbeing Triage
+        </p>
+      </div>
+
+      <!-- Registration ID & Poster No. Box (Only Registration ID and Poster No.) -->
+      <div class="poster-number-box">
+        <div class="poster-number-label">Registration ID</div>
+        <div class="poster-number-writein">
+          Poster No: [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
+        </div>
+      </div>
+    </header>
+
+    <!-- ====================================================================
+         2. ACADEMIC ABSTRACT & CORE PROJECT METRICS STRIP
+         ==================================================================== -->
+    <section class="abstract-kpi-strip">
+      <div class="abstract-box">
+        <h2>Abstract &amp; Project Overview</h2>
+        <p>
+          Higher education institutions face a critical challenge in addressing student mental wellbeing, often relying on reactive intervention models or consumer-facing (B2C) digital applications that present severe institutional privacy risks and high clinical liability. To address this gap, this research introduces <strong>MindStat Care</strong>, an institutional-grade B2B data analytics framework designed to map campus-wide stress trends and proactively connect students with support resources. The project digitizes validated clinical psychometric instruments (such as the PHQ-9 and DASS-21) and utilizes a two-tier decoupled database architecture to ensure strict user anonymity while still permitting institutional participation tracking. A pilot dataset (<em>N</em>=80) was gathered via a digital interface that implements automated data-cleaning protocols, including time-stamping and programmed attention checks, to filter out invalid or randomized responses. The backend computational engine, developed in Python using Pandas and Matplotlib, processes these raw survey inputs to transform subjective, individual psychological data into anonymized, macro-level statistical clusters categorized by academic department and year. Pilot deployment validated the system's capacity to generate actionable campus heat maps, successfully allowing administrators to identify specific departmental stress spikes and allocate targeted counseling resources before issues reach a clinical threshold. Ultimately, MindStat Care bridges the gap between clinical validity and institutional safety, offering a highly scalable, low-liability Software-as-a-Service (SaaS) solution for educational institutions, with future development focused on deploying a real-time administrative graphical user interface (GUI) integrated with automated care referral pipelines.
+        </p>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-val">N = 80 Valid</div>
+          <div class="kpi-title">Cleaned Pilot Cohort</div>
+          <div class="kpi-sub">Filtered from N=98 raw entries (81.6% clean yield; 18 spam/troll entries dropped)</div>
+        </div>
+        <div class="kpi-card emerald">
+          <div class="kpi-val">&alpha; = 0.54 &rarr; 0.82</div>
+          <div class="kpi-title">Psychometric Reliability</div>
+          <div class="kpi-sub">Cronbach's &alpha; improvement after automated timestamp (&lt;45s) &amp; attention-check scrubbing</div>
+        </div>
+        <div class="kpi-card coral">
+          <div class="kpi-val">2.45&times; Stress Spike</div>
+          <div class="kpi-title">Primary Stress Trigger</div>
+          <div class="kpi-sub">Sudden schedule disruption + multi-task overload drives acute DASS-21 surge (p &lt; 0.001)</div>
+        </div>
+        <div class="kpi-card amber">
+          <div class="kpi-val">100% Zero-PII</div>
+          <div class="kpi-title">2-Tier Decoupled DB</div>
+          <div class="kpi-sub">Zero relational keys between Clinical Store (DB A) &amp; Participation Credit Store (DB B)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. THREE-COLUMN PROJECT SHOWCASE GRID
+         ==================================================================== -->
+    <main class="poster-columns">
+
+      <!-- ==================================================================
+           COLUMN 1: NECESSITY OF MINDSTAT CARE + COMPUTATIONAL PIPELINE
+           ================================================================== -->
+      <div class="poster-col">
+
+        <!-- SECTION 1: THE INSTITUTIONAL CRISIS GAP & NECESSITY OF B2B MACRO-ANALYTICS -->
+        <article class="section-card">
+          <div class="section-header">
+            <h3>1. The Institutional Crisis Gap &amp; Necessity of B2B Analytics</h3>
+          </div>
+          <div class="section-body">
+            <div class="sub-heading">Why Proactive Institutional Mental Health Infrastructure is Urgent</div>
+            <ul class="bullet-list">
+              <li><strong>The Danger of Reactive Campus Models:</strong> Universities and colleges predominantly operate on a <em>post-crisis reactive model</em>&mdash;intervening only after severe academic burnout, clinical depression, or behavioral emergencies manifest, because administrators lack early-warning visibility into student stress trends.</li>
+              <li><strong>Why Consumer (B2C) Apps Fail Educational Institutions:</strong> Commercial mental health apps are designed to diagnose individual users (B2C). Deploying B2C apps across a campus creates massive <strong>clinical malpractice liability</strong>, <strong>severe student data-privacy exposure</strong>, and low participation due to invasive tracking of personal identifiers.</li>
+              <li><strong>The MindStat Care B2B Paradigm Shift:</strong> MindStat Care is engineered specifically as a <strong>low-liability institutional (B2B) macro-analytics radar</strong>. By stripping 100% of Personally Identifiable Information (PII) at the point of entry, it empowers Deans and Principals with anonymized, department-level stress heatmaps to deploy wellness interventions <em>before</em> crises occur.</li>
+            </ul>
+
+            <table class="comp-table">
+              <thead>
+                <tr>
+                  <th>System Dimension</th>
+                  <th>Consumer B2C Mental Health Apps</th>
+                  <th>MindStat Care (Institutional B2B Radar)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Core Assessment Focus</strong></td>
+                  <td class="bad-cell">Individual Clinical Diagnosis (High Liability)</td>
+                  <td class="good-cell">Department &amp; Year Macro-Clusters (Safe Triage)</td>
+                </tr>
+                <tr>
+                  <td><strong>Student Privacy &amp; PII</strong></td>
+                  <td class="bad-cell">Logs Name, Email, Phone, IP &amp; Chat History</td>
+                  <td class="good-cell">100% Zero-PII Stripping at Point of Entry</td>
+                </tr>
+                <tr>
+                  <td><strong>Student Honesty &amp; Trust</strong></td>
+                  <td class="bad-cell">Low (&lt;15% uptake) or Biased if Identity Tracked</td>
+                  <td class="good-cell">High (&gt;85% uptake) via Decoupled Credit Ledger</td>
+                </tr>
+                <tr>
+                  <td><strong>Institutional Response</strong></td>
+                  <td class="bad-cell">Passive Self-Help / Post-Crisis Escalation</td>
+                  <td class="good-cell">Proactive Departmental Resilience Workshops</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 2: COMPUTATIONAL PIPELINE & AUTOMATED DATA HYGIENE ENGINE -->
+        <article class="section-card flex-grow">
+          <div class="section-header teal">
+            <h3>2. Open-Source Pipeline &amp; Automated Data Hygiene Engine</h3>
+          </div>
+          <div class="section-body">
+            <div class="sub-heading">Open-Source Statistical &amp; Psychometric Architecture</div>
+            <p>
+              To ensure any educational institution can deploy MindStat Care without expensive proprietary software licenses (eliminating SPSS, SAS, or Tableau fees), the complete ingestion, scrubbing, clustering, and visualization engine is built on an open-source Python stack:
+            </p>
+            <div class="tech-pill-row">
+              <span class="tech-pill">Python 3.12+ Core</span>
+              <span class="tech-pill">Pandas / NumPy Analytics</span>
+              <span class="tech-pill">SQLite3 Decoupled Stores</span>
+              <span class="tech-pill">Matplotlib Visual Engine</span>
+              <span class="tech-pill">Streamlit Live Admin GUI</span>
+            </div>
+
+            <div class="sub-heading">4-Stage Automated Anti-Trolling &amp; Data Scrubbing Protocol</div>
+            <ul class="bullet-list">
+              <li><strong>Stage 1 (In-Memory PII Scrubber):</strong> Strips all email addresses, IP logs, and browser metadata in volatile memory prior to database storage.</li>
+              <li><strong>Stage 2 (Completion Time-Stamping Gate):</strong> Measures exact completion duration (&Delta;<em>t</em> = <em>t</em><sub>submit</sub> &minus; <em>t</em><sub>init</sub>). Automatically flags and drops speed-run spam completed in <strong>&lt; 45 seconds</strong> (such as a 40s entry in Batch 1) and stale session timeouts (&gt; 1 hr, e.g., 1d 11h anomaly), removing <em>n</em>=8 invalid entries.</li>
+              <li><strong>Stage 3 (Embedded Attention &amp; Integrity Checks):</strong> Automatically drops randomized or troll submissions failing embedded control items (<em>"Please select 'Agree' for this statement"</em>) or exhibiting multi-select straight-lining corruption (<em>n</em>=10 dropped).</li>
+              <li><strong>Stage 4 (Psychometric Vectorization):</strong> Integrates standardized <strong>PHQ-9</strong> (0&ndash;27) and <strong>DASS-21</strong> (0&ndash;42) clinical scales with 10 situational behavioral stress items into validated cohort clusters (<em>N</em>=80).</li>
+            </ul>
+
+            <div class="chart-box">
+              <img src="assets/fig2_data_hygiene_funnel.png" alt="4-Stage Automated Data Hygiene Funnel" />
+              <div class="chart-caption">
+                Figure 1: Automated 4-Stage Data Hygiene Funnel (Raw N=98 &rarr; Validated N=80) &amp; Completion Duration Gate demonstrating Cronbach's &alpha; reliability improvement (0.54 &rarr; 0.82).
+              </div>
+            </div>
+
+            <div class="callout-banner">
+              <strong>Why Automated Hygiene Matters:</strong> Removing the 18 contaminated speed-run and attention-check failures reduced scale variance noise by <strong>38.4%</strong> and elevated internal consistency from <strong>&alpha; = 0.54 (noisy unfiltered intake)</strong> to <strong>&alpha; = 0.82 (high psychometric reliability)</strong>, preventing false institutional alarms.
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ==================================================================
+           COLUMN 2: TWO-TIER DECOUPLED ARCHITECTURE + CAMPUS STRESS HEATMAP
+           ================================================================== -->
+      <div class="poster-col">
+
+        <!-- SECTION 3: TWO-TIER DECOUPLED DATABASE ARCHITECTURE -->
+        <article class="section-card">
+          <div class="section-header">
+            <h3>3. Two-Tier Decoupled Privacy &amp; Support Architecture</h3>
+          </div>
+          <div class="section-body">
+            <div class="sub-heading">Resolving the "Participation vs. Privacy" Institutional Deadlock</div>
+            <p>
+              Campus wellbeing surveys face a persistent structural dilemma: <strong>students rarely complete unincentivized surveys</strong>, yet <strong>recording Roll Numbers to award academic credit destroys anonymity</strong> and induces dishonest, socially desirable answers. MindStat Care resolves this through a <strong>Two-Tier Decoupled Database Architecture</strong>:
+            </p>
+            <ul class="bullet-list">
+              <li><strong>Database A (Clinical Analytics Store &mdash; Zero PII):</strong> Receives only the sanitized psychological response vector, coarse cohort tags (Department &amp; Academic Year), and an ephemeral hash (<code>MSC-XXXXXXXX</code>). Zero Roll Numbers, names, or exact timestamps are stored.</li>
+              <li><strong>Cryptographic Air-Gap &amp; One-Way Stateless Redirect:</strong> Once Database A commits the anonymous vector, session memory is purged and a one-way stateless redirect routes the student to an isolated credit portal.</li>
+              <li><strong>Database B (Participation Credit Store &mdash; Zero Clinical Data):</strong> Logs <em>only</em> the student's Roll Number (e.g., <code>2026-CS-1001</code>) and a date-bucketed completion flag so faculty can award <strong>+2 Internal Assessment Marks</strong>. Because Database A and Database B share <strong>zero relational keys, zero foreign keys, and zero synchronized timestamps</strong>, mathematical join re-identification (<em>A</em> &#x22C8; <em>B</em>) is impossible.</li>
+              <li><strong>Voluntary Opt-In Crisis Escalation:</strong> While macro-analytics remain 100% anonymous, an independent, self-initiated <em>"Request Immediate Professional Support"</em> button allows students in acute distress to voluntarily request confidential counseling triage.</li>
+            </ul>
+
+            <div class="chart-box">
+              <img src="assets/fig1_decoupled_architecture.png" alt="Two-Tier Decoupled Database Architecture" />
+              <div class="chart-caption">
+                Figure 2: MindStat Care System Architecture illustrating the Zero-Key Air Gap between Database A (Clinical Store) and Database B (Participation Credit Ledger).
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 4: MACRO-LEVEL DEPARTMENTAL CAMPUS STRESS HEATMAP -->
+        <article class="section-card flex-grow">
+          <div class="section-header emerald">
+            <h3>4. Macro-Level Departmental Campus Stress Heatmap (N=80)</h3>
+          </div>
+          <div class="section-body">
+            <p>
+              Rather than profiling individual students, the backend engine aggregates validated responses into a composite <strong>Campus Stress Index (CSI &isin; [0, 100])</strong> across academic departments and years to guide administrative decision-making:
+            </p>
+            <div class="callout-banner" style="text-align:center; font-weight:800; font-size:6.6mm; padding:2.6mm 4mm;">
+              CSI<sub>d,y</sub> = 52 &times; (Mean DASS<sub>Stress</sub> / 42) + 32 &times; (Mean PHQ-9 / 27) + 22 &times; ((100 &minus; Mean Resilience) / 100) + 4
+            </div>
+
+            <div class="chart-box">
+              <img src="assets/fig3_campus_stress_heatmap.png" alt="Macro-Level Departmental Campus Stress Heatmap" />
+              <div class="chart-caption">
+                Figure 3: (A) Departmental &times; Academic Year Stress Heatmap pinpointing CRITICAL stress hotspots in Senior &amp; Sophomore cohorts; (B) Multi-Subscale Psychometric Radar.
+              </div>
+            </div>
+
+            <div class="callout-banner coral">
+              <strong>Proactive Administrative Triage in Action:</strong> The macro-heatmap immediately highlights localized stress spikes in <strong>Year 4 Electronics (CSI = 66.8)</strong>, <strong>Year 2 Electronics (CSI = 61.6)</strong>, and <strong>Year 1/4 Commerce (CSI = 56.3 / 55.9)</strong> driven by placement pressure, syllabus transitions, and schedule shifts&mdash;allowing Deans to deploy targeted departmental support before clinical escalation.
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ==================================================================
+           COLUMN 3: EMPIRICAL PILOT INSIGHTS + INSTITUTIONAL IMPACT & SAAS
+           ================================================================== -->
+      <div class="poster-col">
+
+        <!-- SECTION 5: EMPIRICAL PILOT VALIDATION & BEHAVIORAL STRESS TRIGGERS -->
+        <article class="section-card">
+          <div class="section-header">
+            <h3>5. Empirical Pilot Validation (N=80) &amp; Stress Triggers</h3>
+          </div>
+          <div class="section-body">
+            <div class="sub-heading">Statistical Clustering of Behavioral &amp; Psychometric Indicators</div>
+            <ul class="bullet-list">
+              <li><strong>Multi-Batch Primary Pilot Study (<em>N</em>=98 Raw &rarr; <em>N</em>=80 Validated):</strong> Evaluated 10 behavioral coping and task-management dimensions alongside clinical stress rubrics across a gender-balanced cohort (52.5% Female, 47.5% Male; primary age group 16&ndash;25 years).</li>
+              <li><strong>Real-World Dirty Data Resolution:</strong> Automated Python scripts resolved string-encoding drift, stripped raw email/IP metadata, isolated multi-select anomalies, and filtered out real speed-run (40s) and session timeout (1d 11h) outliers.</li>
+              <li><strong>Identifying Latent Behavioural Vulnerability Clusters:</strong> Cross-tabulating behavioral responses against DASS-21 and PHQ-9 scales revealed that <strong>sudden schedule disruptions</strong> and <strong>multi-tasking urgency overload</strong> act as the primary catalysts for campus burnout.</li>
+            </ul>
+
+            <div class="chart-box">
+              <img src="assets/fig4_pilot_stress_triggers.png" alt="Pilot Stress Triggers and Behavioral Clusters" />
+              <div class="chart-caption">
+                Figure 4: (A) Behavioral response distributions across the validated cohort (N=80); (B) Clinical DASS-21 &amp; PHQ-9 stress spikes across 4 behavioral clusters (p &lt; 0.001).
+              </div>
+            </div>
+
+            <div class="callout-banner">
+              <strong>Key Empirical Finding (<em>N</em>=80):</strong> While 73.8% (<em>n</em>=59) adapt calmly to plan changes, the <strong>26.2% (<em>n</em>=21) Change-Distressed &amp; Rigid cohort</strong> combined with <strong>40.0% (<em>n</em>=32) Urgent-Task Firefighting</strong> forms an acute vulnerability cluster (Cluster 4) with a <strong>mean DASS-21 Stress score of 28.9</strong> (above the 19.0 moderate-severe threshold) and <strong>mean PHQ-9 score of 16.6</strong> (above the 10.0 triage cutoff).
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 6: INSTITUTIONAL IMPACT, INTERVENTIONS & ECONOMIC SCALABILITY -->
+        <article class="section-card flex-grow">
+          <div class="section-header emerald">
+            <h3>6. Institutional Impact, Interventions &amp; Scalability</h3>
+          </div>
+          <div class="section-body">
+            <div class="sub-heading">Translating Statistical Clusters into Proactive Campus Care</div>
+            <ul class="bullet-list">
+              <li><strong>Evidence-Based Academic Scheduling:</strong> Equips Deans and Heads of Departments to coordinate exam/submission calendars and avoid abrupt timetable changes in Cluster-4-heavy streams, directly mitigating the 26.2% schedule-disruption stress spike.</li>
+              <li><strong>Targeted Resilience Micro-Workshops:</strong> Replaces ineffective, low-attendance generic lectures with precision departmental workshops: (a) <em>Cognitive Flexibility &amp; Change Adaptation</em> for Year 2/4 cohorts, and (b) <em>Structured Eisenhower Matrix Task-Prioritization</em> for the 40.0% urgency-overwhelmed group.</li>
+              <li><strong>Interactive Administrative Prototype:</strong> Accompanied by a working Python/Streamlit decision-support dashboard providing live hygiene auditing, decoupled database verification, and real-time cohort heatmaps.</li>
+            </ul>
+
+            <div class="sub-heading">Economic Viability &amp; Near-Zero Marginal Cost SaaS Architecture</div>
+            <table class="comp-table">
+              <thead>
+                <tr>
+                  <th>Deployment &amp; Cost Metric</th>
+                  <th>Commercial Enterprise / B2C Suites</th>
+                  <th>MindStat Care Framework</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Annual Software Licensing</strong></td>
+                  <td class="bad-cell">&#8377;2,50,000 &ndash; &#8377;5,00,000 / year</td>
+                  <td class="good-cell">&#8377;0 (100% Open-Source Python/SQLite)</td>
+                </tr>
+                <tr>
+                  <td><strong>Per-Student Marginal Cost</strong></td>
+                  <td class="bad-cell">&#8377;300 &ndash; &#8377;800 per student / year</td>
+                  <td class="good-cell">&lt; &#8377;2 / student (Near-Zero Marginal Cost)</td>
+                </tr>
+                <tr>
+                  <td><strong>Compute Infrastructure</strong></td>
+                  <td class="bad-cell">Dedicated Proprietary Cloud Servers</td>
+                  <td class="good-cell">Standard Institutional PC / Free Cloud Tier</td>
+                </tr>
+                <tr>
+                  <td><strong>Institutional Privacy Risk</strong></td>
+                  <td class="bad-cell">High Clinical &amp; PII Breach Exposure</td>
+                  <td class="good-cell">Zero-PII Air-Gapped Safety by Design</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="callout-banner emerald">
+              <strong>Long-Term Impact:</strong> MindStat Care proves that rigorous statistical data hygiene combined with privacy-first database engineering can provide every school, college, and university&mdash;regardless of budget&mdash;with an ethical, proactive mental health early-warning system.
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+    </main>
+
+    <!-- ====================================================================
+         4. BOTTOM PROJECT VISION & IMPACT BANNER
+         ==================================================================== -->
+    <footer class="poster-footer">
+      <div>
+        <span class="footer-tag">CORE MISSION:</span> Shifting Campus Mental Healthcare from Reactive Crisis Triage to Proactive, Privacy-Preserving Institutional Prevention
+      </div>
+      <div>
+        <span class="footer-tag">FRAMEWORK PILLARS:</span> Validated Psychometrics (PHQ-9 / DASS-21) &bull; Automated Anti-Trolling Hygiene &bull; Two-Tier Decoupled Anonymity &bull; Actionable Macro Heatmaps
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function setScale(mode) {
+      const canvas = document.getElementById('posterCanvas');
+      if (mode === 'actual') {
+        canvas.style.transform = 'none';
+        document.body.style.overflow = 'auto';
+      } else {
+        const pxPerMm = 3.7795275591;
+        const posterPx = 1000 * pxPerMm;
+        const availW = window.innerWidth - 40;
+        const availH = window.innerHeight - 80;
+        const scale = Math.min(availW / posterPx, availH / posterPx, 1);
+        canvas.style.transform = `scale(${scale})`;
+        canvas.style.marginTop = '56px';
+        canvas.style.marginLeft = Math.max(20, ( window.innerWidth - posterPx * scale ) / 2) + 'px';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    window.addEventListener('load', () => setScale('fit'));
+    window.addEventListener('resize', () => {
+      const canvas = document.getElementById('posterCanvas');
+      if (canvas.style.transform !== 'none') setScale('fit');
+    });
+  </script>
+</body>
+</html>

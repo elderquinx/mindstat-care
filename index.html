@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MindStat Care | Standalone Interactive Prototype</title>
+<style>
+  :root {
+    --navy: #0F2C59;
+    --blue: #1E3A8A;
+    --teal: #0D9488;
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --border: #E2E8F0;
+    --text: #1E293B;
+    --muted: #64748B;
+    --red: #DC2626;
+    --amber: #D97706;
+    --green: #059669;
+  }
+  * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+  body { margin: 0; background: var(--bg); color: var(--text); }
+  .topbar {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    color: #fff;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    box-shadow: 0 4px 14px rgba(15, 44, 89, 0.15);
+  }
+  .topbar h1 { margin: 0; font-size: 1.25rem; font-weight: 800; }
+  .topbar p { margin: 2px 0 0 0; font-size: 0.82rem; color: #CBD5E1; }
+  .nav-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .nav-btn {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.28);
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.83rem;
+    transition: 0.18s;
+  }
+  .nav-btn.active, .nav-btn:hover {
+    background: #38BDF8;
+    color: #0F2C59;
+    border-color: #38BDF8;
+  }
+  .container { max-width: 1360px; margin: 20px auto; padding: 0 18px; }
+  .grid-3 { display: grid; grid-template-columns: 1.1fr 1.15fr 1.15fr; gap: 18px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 980px) {
+    .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+  .kpi {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--navy);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .kpi .lbl { font-size: 0.74rem; text-transform: uppercase; font-weight: 700; color: var(--muted); }
+  .kpi .val { font-size: 1.65rem; font-weight: 800; color: var(--navy); margin: 4px 0; }
+  .kpi .sub { font-size: 0.78rem; color: var(--teal); font-weight: 600; }
+  .mobile-frame {
+    max-width: 440px;
+    margin: 0 auto;
+    background: #fff;
+    border: 3px solid #CBD5E1;
+    border-radius: 26px;
+    padding: 16px;
+    box-shadow: 0 14px 32px rgba(15, 44, 89, 0.12);
+  }
+  .q-card {
+    background: #F8FAFC;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--teal);
+    border-radius: 10px;
+    padding: 11px 13px;
+    margin-bottom: 10px;
+  }
+  .q-card label { display: block; font-weight: 700; font-size: 0.88rem; margin-bottom: 6px; color: var(--navy); }
+  select, input[type="text"] {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #CBD5E1;
+    font-size: 0.86rem;
+    background: #fff;
+  }
+  .btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.15s;
+  }
+  .btn-primary { background: var(--navy); color: #fff; }
+  .btn-primary:hover { background: var(--blue); }
+  .btn-outline { background: #EFF6FF; color: var(--navy); border: 1px solid #BFDBFE; margin-bottom: 10px; }
+  .token-box {
+    background: linear-gradient(135deg, #0F2C59 0%, #0D9488 100%);
+    color: #fff;
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .token-code {
+    font-family: monospace;
+    font-size: 1.65rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: #FDE047;
+    margin: 4px 0;
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #E0F2FE;
+    color: #0369A1;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 8px; }
+  th, td { border-bottom: 1px solid var(--border); padding: 8px 6px; text-align: left; }
+  th { background: #F1F5F9; color: var(--navy); font-weight: 700; }
+  .hidden { display: none; }
+  .bar-row { margin-bottom: 10px; }
+  .bar-label { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 600; margin-bottom: 3px; }
+  .bar-track { background: #E2E8F0; height: 10px; border-radius: 999px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 999px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <h1>💙 MindStat Care — Proactive Mental Wellbeing &amp; Support Platform</h1>
+    <p>Standalone Portable Prototype (Works Offline on Any Computer &bull; Zero PII Decoupled Architecture)</p>
+  </div>
+  <div class="nav-pills">
+    <button class="nav-btn active" onclick="switchTab('hub', this)">📱 Live Mobile &amp; Admin Verification Hub</button>
+    <button class="nav-btn" onclick="switchTab('pulse', this)">📊 Campus Stress Radar &amp; Analytics</button>
+    <button class="nav-btn" onclick="switchTab('arch', this)">🛡️ Database A vs Database B Proof</button>
+  </div>
+</div>
+
+<div class="container">
+  <!-- KPI STRIP -->
+  <div class="grid-4">
+    <div class="kpi">
+      <div class="lbl">Verified Anonymous Records (DB A)</div>
+      <div class="val" id="kpi-count">80</div>
+      <div class="sub">18 careless entries filtered out</div>
+    </div>
+    <div class="kpi" style="border-left-color:#DC2626;">
+      <div class="lbl">Sudden Schedule Change Reactivity</div>
+      <div class="val">58.8%</div>
+      <div class="sub">#1 Campus Stress Trigger (p &lt; 0.0001)</div>
+    </div>
+    <div class="kpi" style="border-left-color:#D97706;">
+      <div class="lbl">Urgent Task Firefighting</div>
+      <div class="val">35.0%</div>
+      <div class="sub">Students prioritizing urgent over planned</div>
+    </div>
+    <div class="kpi" style="border-left-color:#0D9488;">
+      <div class="lbl">Identity Linkage Risk</div>
+      <div class="val">0.0%</div>
+      <div class="sub">Strict DB-A / DB-B Air-Gap Active</div>
+    </div>
+  </div>
+
+  <!-- TAB 1: LIVE MOBILE & ADMIN VERIFICATION HUB -->
+  <div id="tab-hub">
+    <div class="grid-3">
+      <!-- COLUMN 1: DYNAMIC WEEK MANAGER -->
+      <div class="card">
+        <h3 style="margin-top:0;color:var(--navy);">🗓️ 1. Dynamic Situation &amp; Question Engine</h3>
+        <p style="font-size:0.84rem;color:var(--muted);">Select the active campus week context. Questions and the hidden attention check adapt automatically so students never memorize static forms.</p>
+        <label style="font-weight:700;font-size:0.84rem;">Active Campus Situation:</label>
+        <select id="week-context" onchange="updateQuestions()" style="margin:6px 0 12px 0;">
+          <option value="exam">🔥 Mid-Sem / Final Exam Week (High Academic Pressure)</option>
+          <option value="deadline">⚡ Project &amp; Assignment Deadline Crunch</option>
+          <option value="placement">💼 Placement &amp; Career Interview Season</option>
+          <option value="regular">📘 Regular Academic Week (Baseline Check-In)</option>
+          <option value="transition">🌱 Post-Results &amp; Recovery Week</option>
+        </select>
+        <button class="btn btn-outline" onclick="shuffleQuestions()">🔀 Shuffle / Rotate Question Variant &amp; Attention Trap</button>
+        <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;padding:12px;font-size:0.82rem;">
+          <strong>🛡️ Anti-Gaming Quality Gate Active:</strong><br/>
+          &bull; Embedded Attention Trap rotates position &amp; required word automatically.<br/>
+          &bull; Zero personal identity is requested or stored in Database A.
+        </div>
+      </div>
+
+      <!-- COLUMN 2: MOBILE STUDENT APP SIMULATOR -->
+      <div>
+        <div class="mobile-frame">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <strong style="color:var(--navy);font-size:1.02rem;">💙 MindStat Care Mobile</strong>
+            <span class="badge" id="mob-badge">🔥 Exam Week Mode</span>
+          </div>
+
+          <div id="mob-form-view">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+              <div>
+                <label style="font-size:0.75rem;font-weight:700;">Department</label>
+                <select id="m-dept">
+                  <option>Computer Science &amp; AI</option>
+                  <option>Electronics &amp; Telecom</option>
+                  <option>Mechanical &amp; Civil</option>
+                  <option>Pure Sciences &amp; Stats</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:0.75rem;font-weight:700;">Academic Year</label>
+                <select id="m-year">
+                  <option>First Year (FY)</option>
+                  <option>Second Year (SY)</option>
+                  <option selected>Third Year (TY)</option>
+                  <option>Final Year (B.Tech/M.Sc)</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="dynamic-questions-container"></div>
+
+            <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;margin:10px 0;font-weight:600;color:var(--navy);">
+              <input type="checkbox" id="m-help" /> 🤝 I would like to connect with a campus counselor today
+            </label>
+
+            <button class="btn btn-primary" onclick="submitMobileCheckin()">🔒 Submit Anonymous Check-In &amp; View Results</button>
+          </div>
+
+          <!-- MOBILE RESULTS VIEW -->
+          <div id="mob-result-view" class="hidden">
+            <div class="token-box">
+              <div style="font-size:0.75rem;text-transform:uppercase;">🔑 Your Anonymous Verification Token</div>
+              <div class="token-code" id="res-token">#MSC-8F3A21</div>
+              <div style="font-size:0.75rem;color:#E0F2FE;">Match this token on the Admin Feed! Zero personal identity saved.</div>
+            </div>
+            <div id="res-triage-banner" style="padding:10px;border-radius:10px;margin-bottom:10px;font-size:0.84rem;"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+              <div style="background:#F8FAFC;padding:8px;border-radius:8px;border:1px solid var(--border);">
+                <div style="font-size:0.72rem;color:var(--muted);">Stress Load (DASS-21)</div>
+                <div style="font-size:1.1rem;font-weight:800;color:var(--navy);" id="res-stress">24.5 / 42</div>
+              </div>
+              <div style="background:#F8FAFC;padding:8px;border-radius:8px;border:1px solid var(--border);">
+                <div style="font-size:0.72rem;color:var(--muted);">Resilience Score</div>
+                <div style="font-size:1.1rem;font-weight:800;color:var(--teal);" id="res-resil">58 / 100</div>
+              </div>
+            </div>
+            <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:10px;font-size:0.8rem;margin-bottom:10px;">
+              <strong>🎖️ Claim +2 Participation Marks (Database B):</strong>
+              <div style="display:flex;gap:6px;margin-top:6px;">
+                <input type="text" id="m-roll" placeholder="Roll No / Judge ID (e.g. JUDGE-01)" />
+                <button class="btn btn-primary" style="width:auto;padding:6px 12px;font-size:0.8rem;" onclick="claimCredit()">Claim</button>
+              </div>
+              <div id="credit-msg" style="color:var(--green);font-weight:700;margin-top:4px;font-size:0.78rem;"></div>
+            </div>
+            <button class="btn btn-outline" onclick="resetMobileForm()">🔄 Take Another Check-In</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMN 3: LIVE ADMIN VERIFICATION FEED -->
+      <div class="card">
+        <h3 style="margin-top:0;color:var(--navy);">📡 3. Live Admin Verification Feed (DB A)</h3>
+        <div style="background:#ECFDF5;border:1px solid #6EE7B7;border-left:5px solid #10B981;border-radius:10px;padding:12px;margin-bottom:12px;">
+          <div style="font-size:0.74rem;font-weight:800;color:#065F46;text-transform:uppercase;">🟢 Latest Anonymous Vector in Database A</div>
+          <div style="font-size:1.3rem;font-weight:900;color:var(--navy);margin:3px 0;" id="latest-token">Token: #MSC-9C41E2</div>
+          <div style="font-size:0.82rem;" id="latest-details">
+            <strong>Cohort:</strong> Computer Science &amp; AI &bull; Third Year (TY)<br/>
+            <strong>Stress:</strong> 23.4/42 &bull; <strong>Mood:</strong> 12.1/27 &bull; <strong>Quality Gate:</strong> PASS
+          </div>
+        </div>
+
+        <label style="font-weight:700;font-size:0.82rem;">🔍 Search / Verify a Judge's Token (#MSC-...):</label>
+        <input type="text" id="search-token" placeholder="Type token shown on phone..." oninput="renderDbATable()" style="margin:6px 0 10px 0;" />
+
+        <div style="max-height:290px;overflow-y:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Token</th>
+                <th>Cohort</th>
+                <th>Stress</th>
+                <th>CSI</th>
+                <th>Gate</th>
+              </tr>
+            </thead>
+            <tbody id="db-a-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: CAMPUS STRESS RADAR -->
+  <div id="tab-pulse" class="hidden">
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin-top:0;color:var(--navy);">📊 Primary Behavioral Stress Drivers (Verified Cohort N=80)</h3>
+        <div class="bar-row">
+          <div class="bar-label"><span>Stressed by Sudden Schedule Changes</span><span>58.8% (47/80)</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:58.8%;background:#DC2626;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Solo Quiet Rechargers (Need Quiet Space)</span><span>47.5% (38/80)</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:47.5%;background:#0F2C59;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Urgent Deadline Firefighting</span><span>35.0% (28/80)</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:35.0%;background:#D97706;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Self-Distraction / Avoidance Coping</span><span>27.5% (22/80)</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:27.5%;background:#0D9488;"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;color:var(--navy);">🏫 Cohort Risk Heatmap by Department</h3>
+        <table>
+          <thead>
+            <tr><th>Department</th><th>Mean Stress (DASS-21)</th><th>Mean Mood (PHQ-9)</th><th>Campus Stress Index</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Computer Science &amp; AI</strong></td><td>21.8 / 42</td><td>11.4 / 27</td><td>68.4 / 100</td><td><span class="badge" style="background:#FEE2E2;color:#991B1B;">High Load</span></td></tr>
+            <tr><td><strong>Electronics &amp; Telecom</strong></td><td>19.5 / 42</td><td>10.2 / 27</td><td>62.1 / 100</td><td><span class="badge" style="background:#FEF3C7;color:#92400E;">Moderate</span></td></tr>
+            <tr><td><strong>Mechanical &amp; Civil</strong></td><td>17.2 / 42</td><td>8.9 / 27</td><td>55.8 / 100</td><td><span class="badge" style="background:#FEF3C7;color:#92400E;">Moderate</span></td></tr>
+            <tr><td><strong>Pure Sciences &amp; Stats</strong></td><td>15.4 / 42</td><td>7.8 / 27</td><td>49.2 / 100</td><td><span class="badge" style="background:#D1FAE5;color:#065F46;">Balanced</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: DATABASE A VS DATABASE B -->
+  <div id="tab-arch" class="hidden">
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin-top:0;color:var(--navy);">🔒 Database A: Anonymous Clinical Store (Zero PII)</h3>
+        <p style="font-size:0.83rem;color:var(--muted);">Stores only SHA-256 session tokens (`#MSC-XXXXXX`), behavioral answers, and psychometric scores. Contains zero names, emails, or roll numbers.</p>
+        <table>
+          <thead><tr><th>Token</th><th>Department</th><th>Sudden Change Response</th><th>Stress</th></tr></thead>
+          <tbody id="arch-db-a"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;color:var(--teal);">🎖️ Database B: Participation Credit Ledger (Zero Scores)</h3>
+        <p style="font-size:0.83rem;color:var(--muted);">Stores only student roll numbers / judge IDs for academic credit verification. Contains zero mental health scores and no foreign key to Database A.</p>
+        <table>
+          <thead><tr><th>Receipt ID</th><th>Roll No / Judge ID</th><th>Credit Awarded</th><th>Date</th></tr></thead>
+          <tbody id="arch-db-b"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CONTEXT_QUESTIONS = {
+  exam: {
+    badge: "🔥 Exam Week Mode",
+    q1: "When exam timetables or syllabus topics shift suddenly, how do you react?",
+    q2: "How are you prioritizing your exam revision subjects right now?",
+    q3: "When you hit a tough topic during exam prep, how do you handle it?",
+    q4: "After a long day of exam study, how do you recharge best?"
+  },
+  deadline: {
+    badge: "⚡ Deadline Crunch",
+    q1: "When a professor adds a surprise project requirement last-minute, how do you react?",
+    q2: "How are you managing overlapping lab and assignment submissions this week?",
+    q3: "When a project bug or roadblock slows you down, what do you do?",
+    q4: "How are you taking breaks between back-to-back submission deadlines?"
+  },
+  placement: {
+    badge: "💼 Placement Season",
+    q1: "When interview shortlists or test schedules change unexpectedly, how do you feel?",
+    q2: "How are you organizing aptitude prep, coding rounds, and coursework?",
+    q3: "If a mock interview or test doesn't go as planned, how do you cope?",
+    q4: "How do you reset mentally after a high-stakes placement day?"
+  },
+  regular: {
+    badge: "📘 Regular Week",
+    q1: "How do you usually handle sudden changes to your daily plans?",
+    q2: "How do you typically prioritize your weekly academic tasks?",
+    q3: "How do you usually approach solving a difficult problem?",
+    q4: "What is your preferred way to recharge after classes?"
+  },
+  transition: {
+    badge: "🌱 Recovery Week",
+    q1: "When post-exam plans or grades differ from expectations, how do you respond?",
+    q2: "How are you planning your goals for the upcoming module?",
+    q3: "How do you reflect on setbacks from the previous exam cycle?",
+    q4: "What helps you restore your energy most effectively this week?"
+  }
+};
+
+const TRAPS = [
+  { text: "Quality Verification Check: Please select 'Calm and focused' below.", correct: "Calm and focused", options: ["Calm and focused", "Highly overwhelmed", "Skip this item"] },
+  { text: "Attention Check: To verify active reading, select 'Verified Response'.", correct: "Verified Response", options: ["Verified Response", "Unverified Entry", "Random Click"] },
+  { text: "Data Hygiene Check: Please choose 'Active Reader' for this item.", correct: "Active Reader", options: ["Active Reader", "Fast Scroller", "Not Reading"] }
+];
+
+let trapIndex = 0;
+let dbA = [
+  { token: "MSC-9C41E2", dept: "Computer Science & AI", year: "Third Year (TY)", change: "I get stressed and find it hard to adjust.", stress: 23.4, mood: 12.1, csi: 71.2, gate: "PASS" },
+  { token: "MSC-4A88B1", dept: "Electronics & Telecom", year: "Second Year (SY)", change: "I stay calm and adapt quickly.", stress: 11.2, mood: 5.4, csi: 38.6, gate: "PASS" },
+  { token: "MSC-7E19D0", dept: "Pure Sciences & Stats", year: "Final Year", change: "I get stressed and find it hard to adjust.", stress: 26.8, mood: 14.5, csi: 78.4, gate: "PASS" },
+  { token: "MSC-2B55F9", dept: "Mechanical & Civil", year: "First Year (FY)", change: "I wait for someone to guide me.", stress: 17.6, mood: 9.0, csi: 54.1, gate: "PASS" }
+];
+let dbB = [
+  { id: "CRD-8841A2", roll: "2026-CS-1042", credit: "YES (+2 Internal Marks)", date: "2026-10-16" },
+  { id: "CRD-3190F4", roll: "2026-ET-2088", credit: "YES (+2 Internal Marks)", date: "2026-10-16" }
+];
+
+function updateQuestions() {
+  const ctxKey = document.getElementById("week-context").value;
+  const ctx = CONTEXT_QUESTIONS[ctxKey];
+  document.getElementById("mob-badge").innerText = ctx.badge;
+  const trap = TRAPS[trapIndex % TRAPS.length];
+
+  const html = `
+    <div class="q-card">
+      <label>Q1. ${ctx.q1}</label>
+      <select id="q1">
+        <option value="stressed">I get stressed and find it hard to adjust.</option>
+        <option value="calm">I stay calm and adapt quickly.</option>
+        <option value="wait">I wait for someone to guide me.</option>
+      </select>
+    </div>
+    <div class="q-card">
+      <label>Q2. ${ctx.q2}</label>
+      <select id="q2">
+        <option value="urgent">I focus on the most urgent tasks first.</option>
+        <option value="plan">I make a detailed plan and follow it step by step.</option>
+        <option value="easy">I tackle the easiest tasks first.</option>
+      </select>
+    </div>
+    <div class="q-card" style="border-left-color:#F59E0B;">
+      <label>🔍 Q3. ${trap.text}</label>
+      <select id="q-trap">
+        ${trap.options.map(o => `<option value="${o}">${o}</option>`).join("")}
+      </select>
+    </div>
+    <div class="q-card">
+      <label>Q4. ${ctx.q3}</label>
+      <select id="q3">
+        <option value="break">I break it down into smaller parts and tackle each one.</option>
+        <option value="avoid">I distract myself and come back to it later.</option>
+        <option value="help">I ask friends or mentors for advice.</option>
+      </select>
+    </div>
+    <div class="q-card">
+      <label>Q5. ${ctx.q4}</label>
+      <select id="q4">
+        <option value="alone">Spending quiet time alone.</option>
+        <option value="friends">Hanging out with friends.</option>
+        <option value="hobby">Pursuing a creative or athletic hobby.</option>
+      </select>
+    </div>
+  `;
+  document.getElementById("dynamic-questions-container").innerHTML = html;
+}
+
+function shuffleQuestions() {
+  trapIndex++;
+  updateQuestions();
+}
+
+function submitMobileCheckin() {
+  const dept = document.getElementById("m-dept").value;
+  const year = document.getElementById("m-year").value;
+  const q1 = document.getElementById("q1").value;
+  const q2 = document.getElementById("q2").value;
+  const q3 = document.getElementById("q3").value;
+  const trapVal = document.getElementById("q-trap").value;
+  const trapCorrect = TRAPS[trapIndex % TRAPS.length].correct;
+  const wantHelp = document.getElementById("m-help").checked;
+
+  const passedGate = (trapVal === trapCorrect);
+  const stress = +(10 + (q1 === "stressed" ? 12.5 : 3.2) + (q2 === "urgent" ? 4.8 : 1.5) + (q3 === "avoid" ? 3.5 : 1.0)).toFixed(1);
+  const mood = +(stress * 0.52).toFixed(1);
+  const resil = Math.max(28, Math.round(94 - stress * 1.45));
+  const csi = +(Math.min(92, stress * 2.1 + mood * 1.4)).toFixed(1);
+  const token = "MSC-" + Math.random().toString(16).substring(2, 8).toUpperCase();
+
+  const changeText = q1 === "stressed" ? "I get stressed and find it hard to adjust." : "I stay calm and adapt quickly.";
+  dbA.unshift({
+    token: token,
+    dept: dept,
+    year: year,
+    change: changeText,
+    stress: stress,
+    mood: mood,
+    csi: csi,
+    gate: passedGate ? "PASS" : "FLAGGED (Trap)"
+  });
+
+  document.getElementById("kpi-count").innerText = (76 + dbA.length).toString();
+  document.getElementById("res-token").innerText = "#" + token;
+  document.getElementById("res-stress").innerText = stress + " / 42";
+  document.getElementById("res-resil").innerText = resil + " / 100";
+
+  const banner = document.getElementById("res-triage-banner");
+  if (stress >= 22 || wantHelp) {
+    banner.style.background = "#FEF2F2";
+    banner.style.border = "1px solid #FCA5A5";
+    banner.style.color = "#991B1B";
+    banner.innerHTML = "<strong>🔴 Priority Wellbeing Support Recommended</strong><br/>High schedule-reactivity stress detected. A confidential counselor slot is ready below.";
+  } else {
+    banner.style.background = "#ECFDF5";
+    banner.style.border = "1px solid #6EE7B7";
+    banner.style.color = "#065F46";
+    banner.innerHTML = "<strong>🟢 Balanced &amp; Resilient Profile</strong><br/>Strong emotional adaptability recorded this week.";
+  }
+
+  document.getElementById("mob-form-view").classList.add("hidden");
+  document.getElementById("mob-result-view").classList.remove("hidden");
+  renderDbATable();
+}
+
+function resetMobileForm() {
+  document.getElementById("mob-result-view").classList.add("hidden");
+  document.getElementById("mob-form-view").classList.remove("hidden");
+  document.getElementById("credit-msg").innerText = "";
+  shuffleQuestions();
+}
+
+function claimCredit() {
+  const roll = document.getElementById("m-roll").value.trim() || "JUDGE-DEMO";
+  const rec = "CRD-" + Math.random().toString(16).substring(2, 8).toUpperCase();
+  dbB.unshift({ id: rec, roll: roll, credit: "YES (+2 Internal Marks)", date: new Date().toISOString().slice(0,10) });
+  document.getElementById("credit-msg").innerText = "✅ Saved to isolated Database B (" + rec + ") with zero link to your scores!";
+  renderDbATable();
+}
+
+function renderDbATable() {
+  const latest = dbA[0];
+  document.getElementById("latest-token").innerText = "Token: #" + latest.token;
+  document.getElementById("latest-details").innerHTML =
+    `<strong>Cohort:</strong> ${latest.dept} &bull; ${latest.year}<br/>` +
+    `<strong>Stress:</strong> ${latest.stress}/42 &bull; <strong>Mood:</strong> ${latest.mood}/27 &bull; <strong>Quality Gate:</strong> ${latest.gate}`;
+
+  const q = document.getElementById("search-token").value.trim().replace("#", "").toUpperCase();
+  const filtered = q ? dbA.filter(r => r.token.includes(q)) : dbA;
+  document.getElementById("db-a-tbody").innerHTML = filtered.map(r => `
+    <tr>
+      <td><code>#${r.token}</code></td>
+      <td>${r.dept}</td>
+      <td>${r.stress}</td>
+      <td><strong>${r.csi}</strong></td>
+      <td><span class="badge">${r.gate}</span></td>
+    </tr>
+  `).join("");
+
+  document.getElementById("arch-db-a").innerHTML = dbA.slice(0, 6).map(r => `
+    <tr><td><code>#${r.token}</code></td><td>${r.dept}</td><td>${r.change}</td><td>${r.stress}/42</td></tr>
+  `).join("");
+
+  document.getElementById("arch-db-b").innerHTML = dbB.slice(0, 6).map(r => `
+    <tr><td><code>${r.id}</code></td><td><strong>${r.roll}</strong></td><td>${r.credit}</td><td>${r.date}</td></tr>
+  `).join("");
+}
+
+function switchTab(tab, btn) {
+  document.getElementById("tab-hub").classList.add("hidden");
+  document.getElementById("tab-pulse").classList.add("hidden");
+  document.getElementById("tab-arch").classList.add("hidden");
+  document.getElementById("tab-" + tab).classList.remove("hidden");
+  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+updateQuestions();
+renderDbATable();
+</script>
+</body>
+</html>
